@@ -1,0 +1,20 @@
+<h2>Consulta de CNPJ</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="cnpj" placeholder="Digite o CNPJ" class="border px-2 py-1 rounded">
+    <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Buscar</button>
+</form>
+
+{% if erro %}
+    <p style="color:red;">{{ erro }}</p>
+{% endif %}
+
+{% if dados %}
+    <div class="mt-4 p-3 border rounded bg-gray-100">
+        <p><strong>Cliente:</strong> {{ dados.cliente }}</p>
+        <p><strong>Consultor:</strong> {{ dados.consultor }}</p>
+        <p><strong>Unidade:</strong> {{ dados.unidade }}</p>
+        <p><strong>Filial:</strong> {{ dados.filial }}</p>
+    </div>
+{% endif %}
