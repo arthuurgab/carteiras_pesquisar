@@ -10,7 +10,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.27']
+ALLOWED_HOSTS = []
+
+AUTH_USER_MODEL = 'contas.Usuarios'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'consultar',
+    'contas',
 ]
 
 MIDDLEWARE = [
