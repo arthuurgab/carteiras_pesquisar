@@ -1,16 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Detalhes
+from datetime import datetime
 
 def DetalheView(request):
+    data = datetime.now().year
+
     dados = None
     erro = None
 
     if request.method == 'POST':
-        cnpj = request.POST.get("cnpj")
-
+        cnpj = request.POST.get("cnpj", "")
+        cnpj = "".join(filter(str.isdigit, cnpj))
+        
         try: 
-            dados = Detalhes.objects.get(cnpj=cnpj)
+            detalhes = Detalhes.objects.get(cnpj=cnpj)
+            dados = {
+                "cliente": detalhes.cliente,
+                "consultor": detalhes.consultor,
+                "unidade": detalhes.unidade,
+                "filial": detalhes.filial,
+            }
+
+            request.session["dados_cnpj"] = dados
+            return redirect("consulta-cnpj")
         except Detalhes.DoesNotExist:
             erro = "CNPJ não encontrado."
+            return redirect("consulta-cnpj")
     
-    return render(request, "detalhes.html", {"dados": dados, "erro": erro})
+    dados = request.session.pop("dados_cnpj", None)
+    erro = request.session.pop("erro_cnpj", None)
+
+    return render(request, "detalhes.html", {"dados": dados, "erro": erro, "data": data})

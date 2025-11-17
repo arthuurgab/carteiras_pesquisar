@@ -1,20 +1,79 @@
-<h2>Consulta de CNPJ</h2>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </head>
 
-<form method="POST">
-    {% csrf_token %}
-    <input type="text" name="cnpj" placeholder="Digite o CNPJ" class="border px-2 py-1 rounded">
-    <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded">Buscar</button>
-</form>
+    <body class="min-h-screen flex flex-col" style="background-color: #1a102a;">
+        <nav class="w-full py-3 px-6 flex items-center justify-between" style="background-color: #110b19;">
+    
+            <!-- LOGO ESQUERDA -->
+            <div class="flex items-center">
+                <img src="C:\Users\rafae\Downloads\Logo Tex 3 Branca.png" alt="Logo Esquerda" class="h-10 w-auto">
+            </div>
+        </nav>
 
-{% if erro %}
-    <p style="color:red;">{{ erro }}</p>
-{% endif %}
+        <div class="flex-1 flex flex-col items-center justify-center p-4">
+            <h2 class="text-6xl font-extrabold  tracking-tight select-none">
+                <span class="text-white drop-shadow-lg">
+                    NÃO SEI
+                </span>
+                
+            </h2>
 
-{% if dados %}
-    <div class="mt-4 p-3 border rounded bg-gray-100">
-        <p><strong>Cliente:</strong> {{ dados.cliente }}</p>
-        <p><strong>Consultor:</strong> {{ dados.consultor }}</p>
-        <p><strong>Unidade:</strong> {{ dados.unidade }}</p>
-        <p><strong>Filial:</strong> {{ dados.filial }}</p>
-    </div>
-{% endif %}
+
+            <form method="POST" class="w-full max-w-md bg-gray-100 shadow-md rounded-lg p-6 flex flex-col items-center gap-4">
+                {% csrf_token %}
+
+                <input 
+                    type="text" 
+                    name="cnpj" 
+                    placeholder="Digite o CNPJ" 
+                    class="w-full border px-3 py-2 rounded focus:ring focus:ring-blue-300"
+                >
+
+                <div class="grid grid-cols-3 gap-4 w-full">
+                    <div class="col-span-2">
+                        <button 
+                            type="submit" 
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded font-medium cursor-pointer">
+                            Buscar
+                        </button>
+                    </div>
+
+                    <div>
+                        <a 
+                            href="" 
+                            class="w-full block text-center bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded font-medium cursor-pointer">
+                            Limpar
+                        </a>
+                    </div>
+                </div>
+
+                {% if erro %}
+                    <p class="text-red-600 text-sm text-center">{{ erro }}</p>
+                {% endif %}
+            </form>
+
+            {% if dados %}
+                <div class="mt-6 w-full max-w-md bg-white shadow-lg rounded-lg p-5 border">
+                    <p class="mb-2"><strong>Cliente:</strong> {{ dados.cliente }}</p>
+                    <p class="mb-2"><strong>Consultor:</strong> {{ dados.consultor }}</p>
+                    <p class="mb-2"><strong>Unidade:</strong> {{ dados.unidade }}</p>
+                    <p><strong>Filial:</strong> {{ dados.filial }}</p>
+                </div>
+            {% endif %}
+        </div>
+        <footer class="w-full py-4 text-center">
+            <p class="text-white text-sm font-medium">
+                © {{ data }} <span class="font-semibold">Tex3 Digital - CNPJ 16.927.395/0001-02</span>. 
+                
+            </p>
+            <p class="text-xs text-gray-300 mt-1">
+                Sistema desenvolvido exclusivamente para uso interno.
+            </p>
+        </footer> 
+    </body>
+</html>
