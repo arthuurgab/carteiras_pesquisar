@@ -24,10 +24,11 @@ def DetalheView(request):
             request.session["dados_cnpj"] = dados
             return redirect("consulta-cnpj")
         except Detalhes.DoesNotExist:
-            erro = "CNPJ não encontrado."
+            request.session["erro_cnpj"] = "CNPJ não encontrado."
             return redirect("consulta-cnpj")
     
     dados = request.session.pop("dados_cnpj", None)
     erro = request.session.pop("erro_cnpj", None)
 
+    print(erro)
     return render(request, "detalhes.html", {"dados": dados, "erro": erro, "data": data})
