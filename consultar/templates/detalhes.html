@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html>
     <head>
@@ -10,17 +11,18 @@
     <body class="min-h-screen flex flex-col" style="background-color: #1a102a;">
         <nav class="w-full py-3 px-6 flex items-center justify-between" style="background-color: #110b19;">
             <div class="flex items-center">
-                <img src="C:\Users\rafae\Downloads\Logo Tex 3 Branca.png" alt="Logo Esquerda" class="h-10 w-auto">
+                <img src="{% static 'logo/Logo Tex 3 Branca.png' %}" alt="Logo Vivo & Tex3" class="h-10 w-auto">
             </div>
         </nav>
 
         <div class="flex-1 flex flex-col items-center justify-center p-4">
             <h2 class="text-6xl font-extrabold mb-6 tracking-tight select-none">
                 <span class="text-white drop-shadow-lg">
-                    Where's
+                    Gestor
                 </span>
-                <span class="bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text drop-shadow-md">
-                    It?
+                <br>
+                <span class="bg-gradient-to-r from-purple-600 to-purple-400 text-transparent bg-clip-text drop-shadow-md">
+                    de Carteira's
                 </span>
             </h2>
 
