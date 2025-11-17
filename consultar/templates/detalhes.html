@@ -7,35 +7,30 @@
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <title>Buscador</title>
     </head>
-
     <body class="min-h-screen flex flex-col" style="background-color: #1a102a;">
         <nav class="w-full py-3 px-6 flex items-center justify-between" style="background-color: #110b19;">
             <div class="flex items-center">
                 <img src="{% static 'logo/Logo Tex 3 Branca.png' %}" alt="Logo Vivo & Tex3" class="h-10 w-auto">
             </div>
         </nav>
-
         <div class="flex-1 flex flex-col items-center justify-center p-4">
             <h2 class="text-6xl font-extrabold mb-6 tracking-tight select-none">
                 <span class="text-white drop-shadow-lg">
-                    Gestor
+                    Gestão
                 </span>
                 <br>
                 <span class="bg-gradient-to-r from-purple-600 to-purple-400 text-transparent bg-clip-text drop-shadow-md">
-                    de Carteira's
+                    de Carteiras
                 </span>
             </h2>
-
             <form method="POST" class="w-full max-w-md bg-gray-100 shadow-md rounded-lg p-6 flex flex-col items-center gap-4">
                 {% csrf_token %}
-
                 <input 
                     type="text" 
                     name="cnpj" 
                     placeholder="Digite o CNPJ" 
                     class="w-full border px-3 py-2 rounded focus:ring focus:ring-blue-300"
                 >
-
                 <div class="grid grid-cols-3 gap-4 w-full">
                     <div class="col-span-2">
                         <button 
@@ -44,7 +39,6 @@
                             Buscar
                         </button>
                     </div>
-
                     <div>
                         <a 
                             href="" 
@@ -53,15 +47,14 @@
                         </a>
                     </div>
                 </div>
-
                 {% if erro %}
                     <p class="text-red-600 text-sm text-center">{{ erro }}</p>
                 {% endif %}
             </form>
-
             {% if dados %}
                 <div class="mt-6 w-full max-w-md bg-white shadow-lg rounded-lg p-5 border">
                     <p class="mb-2"><strong>Cliente:</strong> {{ dados.cliente }}</p>
+                    <p class="mb-2"><strong>Cliente M:</strong> {{ dados.meses }}</p>
                     <p class="mb-2"><strong>Consultor:</strong> {{ dados.consultor }}</p>
                     <p class="mb-2"><strong>Unidade:</strong> {{ dados.unidade }}</p>
                     <p><strong>Filial:</strong> {{ dados.filial }}</p>
@@ -71,7 +64,6 @@
         <footer class="w-full py-4 text-center">
             <p class="text-white text-sm font-medium">
                 © {{ data }} <span class="font-semibold">Tex3 Digital - CNPJ 16.927.395/0001-02</span>. 
-                
             </p>
             <p class="text-xs text-gray-300 mt-1">
                 Sistema desenvolvido exclusivamente para uso interno.

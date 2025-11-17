@@ -19,6 +19,7 @@ def DetalheView(request):
                 "consultor": detalhes.consultor,
                 "unidade": detalhes.unidade,
                 "filial": detalhes.filial,
+                "meses": detalhes.M
             }
 
             request.session["dados_cnpj"] = dados
@@ -29,6 +30,4 @@ def DetalheView(request):
     
     dados = request.session.pop("dados_cnpj", None)
     erro = request.session.pop("erro_cnpj", None)
-
-    print(erro)
     return render(request, "detalhes.html", {"dados": dados, "erro": erro, "data": data})
