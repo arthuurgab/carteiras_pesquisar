@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Detalhes
 from datetime import datetime
-from django.contrib.auth.decorators import login_required
 from contas.decorators import token_required
 
 @token_required
