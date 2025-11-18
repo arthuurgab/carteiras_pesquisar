@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.utils import timezone
-import datetime
+from datetime import timedelta
 
 class Usuarios(AbstractUser):
     unidade = models.CharField(max_length=50, blank=True)
@@ -18,7 +18,15 @@ class LoginToken(models.Model):
 
     def is_valid(self):
         now = timezone.now()
-        return now < self.created_at + datetime.timedelta(minutes=10)
+        user = self.user
+
+        if user.groups.filter(name__in=["admin", "diretoria"]).exists():
+            return False
+        
+        if user.groups.filter(name="supervisor").exists():
+            return now < self.created_at + timedelta(hours=1)
+
+        return now < self.created_at + timedelta(minutes=10)
     
     def __str__(self):
         return f"Token para {self.user}"
