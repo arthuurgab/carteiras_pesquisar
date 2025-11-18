@@ -36,6 +36,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -92,7 +94,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = 'consulta-cnpj'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'solicitar_token'
 LOGOUT_REDIRECT_URL = 'login'
 
 LANGUAGE_CODE = 'pt-BR'
