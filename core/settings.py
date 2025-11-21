@@ -74,8 +74,16 @@ DATABASES = {
 """
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"), conn_max_age=600)
+  'default': {
+      'ENGINE': 'django.db.backends.postgresql',
+      'NAME': 'carteira',
+      'USER': 'postgre',
+      'PASSWORD': 'oqjf?',
+      'HOST': '64.23.134.214',
+      'PORT': '5432',
+  }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
