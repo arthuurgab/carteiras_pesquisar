@@ -1,6 +1,7 @@
 from pathlib import Path
 import os 
 from dotenv import load_dotenv
+import dj_database_url
 
 load_dotenv()
 
@@ -73,14 +74,7 @@ DATABASES = {
 """
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("NAME"),
-        'USER': os.getenv("USER"),
-        'PASSWORD': os.getenv("PASSWORD"),
-        'HOST': os.getenv("HOST"),
-        'PORT': os.getenv("PORT"),
-    }
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"), conn_max_age=600)
 }
 
 AUTH_PASSWORD_VALIDATORS = [
