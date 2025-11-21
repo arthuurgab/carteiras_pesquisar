@@ -94,7 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://seu-projeto-no-render.onrender.com",
+    "https://carteiras-pesquisar.onrender.com",
 ]
 
 LOGIN_URL = 'login'
