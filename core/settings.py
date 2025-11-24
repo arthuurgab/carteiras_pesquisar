@@ -1,9 +1,6 @@
 from pathlib import Path
 import os 
-from dotenv import load_dotenv
 import dj_database_url
-
-load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -11,11 +8,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "carteiras-pesquisar.onrender.com",
-    "localhost",
-    "127.0.0.1"
-]
+ALLOWED_HOSTS = ["64.23.134.214"]
 
 
 AUTH_USER_MODEL = 'contas.Usuarios'
@@ -97,9 +90,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://carteiras-pesquisar.onrender.com",
-]
+CSRF_TRUSTED_ORIGINS = ["http://64.23.134.214", "https://64.23.134.214"]
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'solicitar_token'
@@ -117,7 +108,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
