@@ -2,7 +2,6 @@ from pathlib import Path
 import os
 import dj_database_url
 import environ
-from decouple import config, Csv
 
 env = environ.Env()
 environ.Env.read_env()
