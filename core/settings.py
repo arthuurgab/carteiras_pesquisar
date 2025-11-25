@@ -1,18 +1,18 @@
 from pathlib import Path
+from dotenv import load_dotenv
 import os
-import dj_database_url
-import environ
 
-env = environ.Env()
-environ.Env.read_env()
+# Carrega o arquivo .env
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = env('SECRET_KEY')
+# VARIÁVEIS AMBIENTE
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-DEBUG = env.bool('DEBUG', default=False)
-
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+# ALLOWED_HOSTS em lista
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 AUTH_USER_MODEL = 'contas.Usuarios'
 
@@ -58,10 +58,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# DATABASE (DJANGO-ENviron + dj_database_url)
+
+# ===== DATABASE COM DOTENV =====
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("PASSWORD"),
+        'HOST': os.getenv("HOST"),
+        'PORT': os.getenv("PORT"),
+    }
 }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -69,11 +78,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    "http://64.23.134.214",
-    "https://64.23.134.214"
 ]
 
 LANGUAGE_CODE = 'pt-BR'
@@ -89,6 +93,8 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# ===== EMAIL =====
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
